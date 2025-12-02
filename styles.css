@@ -21,7 +21,7 @@ html {
 
 .flex-header {
   display: flex;
-  justify-content: space-between; /* menu a la izquierda, logo a la derecha */
+  justify-content: space-between; 
   align-items: center;
 }
 
@@ -34,7 +34,7 @@ html {
 }
 
 .dropdown-content {
-  display: none;       /* oculto por defecto */
+  display: none;       
   position: absolute;
   top: 100%;
   left: 0;
@@ -1344,7 +1344,7 @@ a {
 
   .navbar > ul {
     display: flex;
-    justify-content: space-between; /* Los manda a los extremos */
+    justify-content: space-between; 
     width: 100%;
     padding: 0;
     margin: 0;
@@ -1457,7 +1457,7 @@ a {
     color: white;
     padding: 10px 10px;
     border-radius: 10px;
-    font-size: 12px;
+    font-size: 1.5vw;
     cursor: pointer;
     display: inline-block;
     margin-right: 50px;
@@ -1471,10 +1471,10 @@ a {
   .top-bar {
     display: flex;
     gap: 0.001px;
+    width: 100%;
   }
   
-  .header2 {
-    max-width: 1024px;   
+  .header2 { 
     margin-top: 0px;         
     box-sizing: border-box;    
     background-color: #022E4D; 
@@ -1487,7 +1487,7 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px 2px;
   }
 
   .footer1 {
@@ -1834,12 +1834,14 @@ a {
 
   .btnnoticia1 {
     padding: 10px;
-    width: 100px;
+    max-width: 100px;
     background-color: black;
     color: white;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    width: 100%;
+    font-size: 2.2vw;
   }
 
   .equipo2 {
@@ -1961,12 +1963,13 @@ a {
   }
 
   .imagenesficha {
-    width: 110px;
+    max-width: 110px;
     margin-left: 50px;
     border-radius: 10px;
     margin-right: 5px;
     height: 120px;            
-    object-fit: cover;        
+    object-fit: cover;  
+    width: 100%;  
   }
 
   .divdentrofichas {
@@ -2272,6 +2275,7 @@ a {
     color: white;
     font-size: 17px;
     align-items: center;
+    font-size: 2.4vw;
   }
   
   .textoizq2 {
@@ -2283,6 +2287,7 @@ a {
     color: white;
     font-size: 17px;
     align-items: center;
+    font-size: 2.4vw;
   }
   
   .divsentradasmain{
@@ -2300,19 +2305,20 @@ a {
     flex-direction: column;
     max-width: 350px;
     margin-top: 0px;
-    padding: 20px 13px;
+    padding: 45px 1px;
     margin-left: 0px;
     border-radius: 10px;
     margin-top: 1px;
     margin-left: 25px;
     height: 400px;
+    width: 100%;
   }
   
   .divsentradasder {
     background-color: #5C86A2;
     margin: 0px;
     border-radius: 10px;
-    padding: 0px 0px;
+    padding: 26px 0px;
     display: flex;
     flex-direction: column;
     max-width: 350px;
@@ -2327,10 +2333,14 @@ a {
     color: white;
     font-size: 17px;
     align-items: center;
+    width: 100%;
+    font-size: 2.4vw;
   }
   
   .imgentradas {
-    height: 170px;
+    max-width: 350px;
+    width: 100%;
+    height: auto;
   }
   
   .btnnoticia21 {
@@ -2342,6 +2352,8 @@ a {
     border-radius: 10px;
     cursor: pointer;
     font-size: 17px;
+    margin: 5px;
+    font-size: 2.3vw;
   }
   
   .btnnoticia22 {
@@ -2352,7 +2364,7 @@ a {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 2.3vw;
   }
   
   .btnnoticia212 {
@@ -2422,7 +2434,7 @@ a {
 
   
   .textotienda {
-    font-size: 19px;
+    font-size: 2.5vw;
   }
 
   .productostienda {
@@ -2523,15 +2535,15 @@ a {
   }
 
   .btnmejorasestadio {
-    margin-top: 10px; 
+    margin-top: 1px; 
     border: none;
     border-radius: 8px;
     background-color: black;
     color: white;
-    font-size: 15px;
+    font-size: 13px;
     cursor: pointer;
-    display: inline-block;
     width: 100%;
+    padding: 10px;
   }
 
   .noticiasdivs {
@@ -2593,9 +2605,10 @@ a {
     max-width: 275px;
     margin-left: 20px;
     border-radius: 10px;
-    font-size: 13px;
+    font-size: 10px;
     height: 160px;
     width: 100%;
+    margin-right: 20px;
   }
 
   .noticias123 {
@@ -2682,7 +2695,7 @@ a {
 
   .navbar > ul {
     display: flex;
-    justify-content: space-between; /* Los manda a los extremos */
+    justify-content: space-between; 
     width: 100%;
     padding: 0;
     margin: 0;
@@ -3705,7 +3718,7 @@ a {
   }
   
   .dropdown-content {
-    display: none;       /* oculto por defecto */
+    display: none;       
 
   }
 
