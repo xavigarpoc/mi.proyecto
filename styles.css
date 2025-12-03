@@ -1319,6 +1319,10 @@ a {
   display: flex;
 }
 
+@media (min-width: 1025px) {
+    
+}
+
 @media (min-width: 415px) and (max-width: 1024px) {
   
   /* HEADER */
@@ -2026,7 +2030,7 @@ a {
     margin-left: 10px;
     margin-right: 10px;
     text-align: center;
-    font-size: 18px;
+    font-size: 2vw;
   }
 
   .btnaños {
@@ -2037,7 +2041,7 @@ a {
     border-color: #000000;
     border-width: 2px;
     border-radius: 10px;
-    font-size: 16px;
+    font-size: 2.5vw;
 
   }
 
@@ -2066,17 +2070,18 @@ a {
     margin-top: 20px;
     justify-content: center;
     align-items: center;
+    max-width: 1000px;
+    width: 100%;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
   }
 
   .divpatrocinadores1 {
-    width: 500px;
-    background-color: #5C86A2;
-    border-radius: 10px;
     justify-content: space-between;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 20px;
-    align-items: center;
   }
 
   .imagenesytexto {
@@ -2084,7 +2089,8 @@ a {
     margin-left: 20px;
     margin-right: 20px;
     cursor: pointer;
-    width: 300px;
+    max-width: 300px;
+    width: 100%;
   }
 
   .imagengrande {
@@ -2094,33 +2100,36 @@ a {
     height: auto;
     display: block;
     cursor: pointer;
-    width: 200px;
+    max-width: 200px;
+    width: 100%;
   }
 
   .texto {
     margin-left: 50px;
     margin-right: 50px;
+    font-size: 2.9vw;
   }
 
   .divpatrocinadores2 {
-    width: 500px;
-    background-color: #5C86A2;
-    border-radius: 10px;
     justify-content: space-between;
-    display: flex;
-    flex-direction: column;
     margin-bottom: 20px;
-    align-items: center;
   }
 
   .divpatrocinadores3 {
-    width: 500px;
-    background-color: #5C86A2;
-    border-radius: 10px;
     justify-content: space-between;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  }
+
+  .divpatrocinadores1,
+  .divpatrocinadores2,
+  .divpatrocinadores3 {
+      width: 100%;
+      max-width: 500px;
+      background-color: #5C86A2;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+      align-items: center;
   }
 
   .imagenesytexto, .imagengrande {
@@ -2151,27 +2160,32 @@ a {
 
   .titulosobrefoto {
     position: absolute;
-    top: 29px;           
-    left: 24%;          
+    top: 1%;           
+    left: 26%;          
     transform: translateX(-50%);
     color: white;
-    font-size: 14px;
+    font-size: 2vw;
     font-weight: bold;
     align-items: center;
     background-color: rgba(92, 134, 162, 0.5);
     padding-left: 10px;
     padding-right: 10px;
     border-radius: 10px;
+  }
 
+  .contenedor-banner {
+    position: relative;
+    width: 100%;
+    height: auto;
   }
 
   .titulosobrefoto2 {
     position: absolute;
-    top: 855px;           
-    left: 20%;          
+    top: 20%;           
+    left: 22%;          
     transform: translateX(-50%);
     color: white;
-    font-size: 14px;
+    font-size: 2vw;
     font-weight: bold;
     align-items: center;
     background-color: rgba(92, 134, 162, 0.5);
@@ -2184,7 +2198,7 @@ a {
     margin-top: 30px;
     margin-left: 40px;
     margin-right: 40px;
-    font-size: 15px;
+    font-size: 2vw;
     padding-bottom: 10px;
   }
 
@@ -2192,7 +2206,7 @@ a {
     margin-top: 30px;
     margin-left: 40px;
     margin-right: 40px;
-    font-size: 14px;
+    font-size: 2vw;
     padding-bottom: 20px;
   }
 
@@ -2223,17 +2237,22 @@ a {
   }
 
   .imagenesinstalaciones {
-    flex-direction: row;
+    height: auto;
     display: flex;
-    height: 200px;
-    align-content: center;
-    justify-content: space-between;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
     margin-left: 10px;
     margin-right: 10px;
+    margin-left: 10px;
   }
 
   .imagenesf {
     border-radius: 10px;
+    width: 100%;
+    max-width: 160px;
+    height: auto;
+    justify-content: center;
   }
   
   /* ENTRADAS */
