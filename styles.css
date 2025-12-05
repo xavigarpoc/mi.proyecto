@@ -1888,6 +1888,367 @@ a {
     align-items: center;
   }
 
+  /* TIENDA */
+
+  .tiendadiv {
+    background-color: #5C86A2;
+    border-radius: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    max-width: 70%;
+    gap: 30px;
+  }
+
+  .productostienda {
+    text-align: center;
+    color: white;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 20px;
+    max-width: 155px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .tiendadiv2 {
+    margin: 1%;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+    justify-content: center;
+    max-width: 100%;
+  }
+
+  .tiendabanner {
+    background-image: url(http://ciberteamfc.cat/img/tienda/tiendabanner.jpg);
+    display: flex;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    padding: 50px;
+  }
+
+  .imgtienda {
+    max-width: 250px;
+    border-radius: 10px;
+    padding: 3px;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .imgtienda2 {
+    border-radius: 10px;
+    padding: 3px;
+    margin-right: 20px;
+    max-width: 170px;
+    width: 100%;
+  }
+
+  
+  .textotienda {
+    font-size: 1.8vw;
+  }
+
+  .productostienda {
+    text-align: center;
+    color: white;
+    align-items: center;
+    align-content: center;
+    margin-bottom: 30px;
+    margin-right: 10px;
+    margin: 10px;
+  }
+  
+  /* CONTACTO */
+
+.divscontacto {
+  display: flex;
+  flex-direction: row;        /* EN FILA */
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  max-width: 1400px;
+  margin: auto;
+  flex-wrap: nowrap;          /* Mantener en fila mientras quepa */
+}
+
+/* FORMULARIO */
+.divcontacto {
+  max-width: 900px;
+  width: 700px;
+  background-color: #5C86A2;
+  border-radius: 10px;
+  padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgb(0, 0, 0);
+  margin-bottom: 30px;
+  margin-left: 5%;
+  margin-right: 5%;
+  width: 100%;
+  margin-top: 40px;
+}
+
+
+.divcontacto2 {
+  flex: 1;
+  height: 200px;
+  background-image: url(http://ciberteamfc.cat/img/header/logoteam.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-bottom: 50px;
+  margin-top: 50px;
+  width: 100%;
+}
+
+.divcontacto3 {
+  background-color: #5C86A2;
+  border-radius: 10px;
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 20px rgb(0, 0, 0);
+  max-width: 630px;
+  width: 30%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 40px;
+}
+
+/* Dropdown oculto en desktop */
+.dropdown {
+  display: none;
+}
+.dropdown-content {
+  display: none;
+}
+
+/* INDEX/INICIO*/
+
+.noticiascontent {
+  color: #022E4D;
+  display: flex;
+  flex-direction: column;
+}
+
+.indexnoticia1 {
+  display: flex;
+  background-image: url(img/indeximg/imagenfutbol.jpg);
+  background-size: 100%;
+  height: 330px;
+}
+
+.letranoticia1 {
+  background-color: rgba(0, 67, 113, 0.5);
+  width: 600px;
+  height: 300px;
+  padding: 15px;
+  padding-left: 50px;
+  color: white;
+  font-size: 18px;
+}
+
+.indexnoticia2 {
+  display: flex;
+  background-image: url(http://ciberteamfc.cat/img/indeximg/10años.png);
+  background-size: 100%;
+  height: 330px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.letranoticia2 {
+  background-color: rgba(0, 67, 113, 0.5);
+  width: 600px;
+  height: 300px;
+  padding: 15px;
+  padding-left: 50px;
+  color: white;
+  font-size: 18px;
+}
+
+.btnnoticia1 {
+  padding: 15px;
+  width: 140px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.diventradas {
+  background-color: #5C86A2;
+  color: white;
+  text-align: center;
+  padding: 15px;
+}
+
+.boxentradas {
+  padding: 20px;
+  margin: 30px;
+  margin-left: 10%;
+  margin-right: 10%;
+  border-radius: 10px;
+  background-color: #5C86A2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.boxentradas1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.boxentradas2 {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.boxentradas3 {
+  display: flex;
+  flex-direction: column;
+}
+
+.imgboxentradas {
+  width: 450px;
+  max-width: 100%;
+  margin-bottom: 10px;
+  display: block;
+  border-radius: 10px;
+  
+}
+
+.textoboxentradas {
+  color: white;
+  margin-top: 10px;
+}
+
+/* NOTICIAS */
+
+  .noticiasportada {
+    background-image: url(http://ciberteamfc.cat/img/noticias/estadio4kvertical.png);
+    padding: 120px;
+    display: flex;
+    background-repeat: no-repeat; 
+    align-items: center;
+    justify-content: center;
+    background-size: 100%;
+  }
+
+  .divnoticiasportada {
+    display: flex;
+    background-color: rgba(46, 70, 116, 0.5);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    font-size: 12px;
+    justify-content: center;
+  }
+
+  .btnmejorasestadio {
+    margin-top: 1px; 
+    border: none;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+    font-size: 13px;
+    cursor: pointer;
+    width: 100%;
+    padding: 10px;
+  }
+
+  .noticiasdivs {
+    display: flex;
+    justify-content: center;  
+    justify-items: center; 
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .noticiasdiv1 {
+    background-image: url(http://ciberteamfc.cat/img/noticias/noticiacancer.webp);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    padding: 120px 0px;
+    max-width: 330px;
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  .noticiasdiv2 {
+    background-image: url(http://ciberteamfc.cat/img/noticias/copa.webp);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    padding: 120px 0px;
+    max-width: 330px;
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  .noticiasdiv3 {
+    background-image: url(http://ciberteamfc.cat/img/noticias/preguntaa.jpg);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    padding: 120px 0px;
+    max-width: 330px;
+    margin-left: 20px;
+    width: 100%;
+  }
+  
+  .noticiasdiv4 {
+    background-image: url(http://ciberteamfc.cat/img/noticias/celtajugador.jpg);
+    background-size: contain;
+    background-repeat: no-repeat; 
+    background-position: center; 
+    padding: 120px 0px;
+    max-width: 330px;
+    margin-left: 20px;
+    width: 100%;
+  }
+
+  .textonoticias {
+    background-color: rgba(2, 46, 77, 0.8);
+    color: white;
+    margin-top: 1px;
+    max-width: 275px;
+    margin-left: 20px;
+    border-radius: 10px;
+    font-size: 10px;
+    height: 160px;
+    width: 100%;
+    margin-right: 20px;
+  }
+
+  .noticias123 {
+    display: flex;
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .noticiasdivs {
+    display: flex;
+    justify-content: center;  
+    justify-items: center; 
+    width: 100%;
+  }
+
 }
 
 @media (min-width: 415px) and (max-width: 1024px) {
@@ -2985,13 +3346,14 @@ a {
   }
 
   .tiendadiv2 {
-    max-width: 600px;
-    margin: 1%;
+    max-width: 100%;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     align-content: center;
-    justify-content: space-between;
+    justify-content: center;
+    width: 80%;
+    margin-left: auto;
   }
 
   .tiendabanner {
