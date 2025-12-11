@@ -2142,116 +2142,62 @@ a {
 /* NOTICIAS */
 
   .noticiasportada {
-    background-image: url(http://ciberteamfc.cat/img/noticias/estadio4kvertical.png);
-    padding: 120px;
-    display: flex;
-    background-repeat: no-repeat; 
-    align-items: center;
-    justify-content: center;
-    background-size: 100%;
+    padding: 6rem 1rem;
+    background-position: center;
   }
 
   .divnoticiasportada {
-    display: flex;
-    background-color: rgba(46, 70, 116, 0.5);
-    color: white;
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 300px;
-    font-size: 12px;
-    justify-content: center;
+    width: 90%;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .divnoticiasportada h1 {
+    font-size: 1.8rem;
   }
 
   .btnmejorasestadio {
-    margin-top: 1px; 
-    border: none;
-    border-radius: 8px;
-    background-color: black;
-    color: white;
-    font-size: 13px;
-    cursor: pointer;
-    width: 100%;
-    padding: 10px;
+    font-size: 1.1rem;
+    padding: 0.8rem 1.2rem;
+  }
+
+  .barraseparacion {
+    padding: 8px;
   }
 
   .noticiasdivs {
-    display: flex;
-    justify-content: center;  
-    justify-items: center; 
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .noticiasdiv1 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/noticiacancer.webp);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv2 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/copa.webp);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv3 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/preguntaa.jpg);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv4 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/celtajugador.jpg);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-
-  .textonoticias {
-    background-color: rgba(2, 46, 77, 0.8);
-    color: white;
-    margin-top: 1px;
-    max-width: 275px;
-    margin-left: 20px;
-    border-radius: 10px;
-    font-size: 10px;
-    height: 160px;
-    width: 100%;
-    margin-right: 20px;
+    gap: 15px;
   }
 
   .noticias123 {
-    display: flex;
-    max-width: 400px;
-    width: 100%;
+    max-width: 700px;
+    width: 90%;
   }
 
-  .noticiasdivs {
-    display: flex;
-    justify-content: center;  
-    justify-items: center; 
-    width: 100%;
+  .noticiasdiv1,
+  .noticiasdiv2,
+  .noticiasdiv3,
+  .noticiasdiv4 {
+    padding-top: 50%; 
+    margin-left: 0;
   }
 
+  .noticiasdivs, 
+  .noticiasportada {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  .textonoticias {
+    width: 90%;
+    margin-left: 0;
+    padding: 1.2rem;
+    text-align: center;
+  }
+
+  .textonoticias h2 {
+    font-size: 1.2rem;
+  }
 }
 
 @media (min-width: 415px) and (max-width: 1024px) {
@@ -3464,115 +3410,78 @@ a {
 
   /* NOTICIAS */
 
+  .noticiasportada,
+  .noticiasdivs {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+
+  /* PORTADA */
   .noticiasportada {
     background-image: url(http://ciberteamfc.cat/img/noticias/estadio4kvertical.png);
-    padding: 120px;
-    display: flex;
-    background-repeat: no-repeat; 
-    align-items: center;
-    justify-content: center;
-    background-size: 100%;
+    padding: 5rem 1rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
   }
 
   .divnoticiasportada {
-    display: flex;
     background-color: rgba(46, 70, 116, 0.5);
-    color: white;
-    padding: 20px;
+    padding: 1.2rem;
+    width: 100%;
+    max-width: 420px;
     border-radius: 10px;
-    max-width: 300px;
-    font-size: 12px;
-    justify-content: center;
+    text-align: center;
+    font-size: 1rem;
   }
 
   .btnmejorasestadio {
-    margin-top: 1px; 
-    border: none;
-    border-radius: 8px;
-    background-color: black;
-    color: white;
-    font-size: 13px;
-    cursor: pointer;
-    width: 100%;
-    padding: 10px;
+    margin-top: 12px;
+    width: 30%;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
   }
 
   .noticiasdivs {
-    display: flex;
-    justify-content: center;  
-    justify-items: center; 
-    margin-bottom: 20px;
-    width: 100%;
-  }
-
-  .noticiasdiv1 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/noticiacancer.webp);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv2 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/copa.webp);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv3 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/preguntaa.jpg);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-  
-  .noticiasdiv4 {
-    background-image: url(http://ciberteamfc.cat/img/noticias/celtajugador.jpg);
-    background-size: contain;
-    background-repeat: no-repeat; 
-    background-position: center; 
-    padding: 120px 0px;
-    max-width: 330px;
-    margin-left: 20px;
-    width: 100%;
-  }
-
-  .textonoticias {
-    background-color: rgba(2, 46, 77, 0.8);
-    color: white;
-    margin-top: 1px;
-    max-width: 275px;
-    margin-left: 20px;
-    border-radius: 10px;
-    font-size: 10px;
-    height: 160px;
-    width: 100%;
-    margin-right: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin-bottom: 30px;
   }
 
   .noticias123 {
-    display: flex;
-    max-width: 400px;
     width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
   }
 
-  .noticiasdivs {
-    display: flex;
-    justify-content: center;  
-    justify-items: center; 
+  .noticiasdiv1,
+  .noticiasdiv2,
+  .noticiasdiv3,
+  .noticiasdiv4 {
+    background-size: cover;
+    background-position: center;
+    padding-top: 15%;          /* altura moderada */
+    width: 87%;
+    border-radius: 10px;
+    margin-left: 0;
+  }
+
+  /* TEXTOS DE NOTICIAS */
+  .textonoticias {
+    background-color: rgba(2, 46, 77, 0.8);
     width: 100%;
+    max-width: 80%;
+    margin-top: 12px;
+    padding: 1.2rem 1.5rem;
+    border-radius: 10px;
+    font-size: 1rem;
+    text-align: center;
+    height: auto;
+    margin-left: 0;
+    margin-right: 0;
   }
 
   /* PÁGINA NOTICIA */
@@ -3773,6 +3682,8 @@ a {
   .top-bar {
     display: flex;
     gap: 0.001px;
+    width: 10
+    0px;
   }
   
   .header2 {
