@@ -174,4 +174,18 @@
         });
     </script>
 
+
+    <button id="btnTop">⇧</button>
+
+    <script>
+    window.addEventListener("scroll", function () {
+      const b = document.getElementById("btnTop");
+      b.style.display = window.scrollY > 200 ? "block" : "none";
+    });
+    
+    document.getElementById("btnTop").onclick = function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+    </script>
+
 </body>

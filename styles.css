@@ -2027,10 +2027,6 @@ a {
   margin-top: 40px;
 }
 
-/* Dropdown oculto en desktop */
-.dropdown {
-  display: none;
-}
 .dropdown-content {
   display: none;
 }
@@ -2478,13 +2474,26 @@ a {
     font-weight: normal;
   }
   
-  .dropdown {
-    position: relative;
+ .dropdown-content {
+    display: none;       
   }
-  
+
+  .dropdown-content li {
+    display: none; 
+  }
+
+  .dropdown-content a {
+    display: none; 
+  }
+
+  .dropdown-content a:hover {
+    display: none; 
+  }
+
   .dropdown:hover .dropdown-content {
-    display: flex;
+    display: none; 
   }
+
 
   /* INDEX */
 
@@ -3399,13 +3408,6 @@ a {
     margin-left: 5%;
     margin-right: 5%;
     
-  }
-
-  .dropdown {
-    display: none;
-  }
-  .dropdown-content {
-    display: none;
   }
 
   /* NOTICIAS */
@@ -4654,4 +4656,21 @@ a {
     line-height: 1.8;
     margin-bottom: 40px;
   }
+}
+
+/* BOTON ARRIBA */
+
+#btnTop {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #00235e;
+  color: #ffffff;
+  padding: 10px 17px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  display: none;
+  z-index: 999;
 }
