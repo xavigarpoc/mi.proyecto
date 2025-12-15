@@ -76,17 +76,17 @@
 
         <div class="divscontacto">
             <div class="divcontacto">
-                <form class="formcontacto">
-                    
+                <form class="formcontacto" action="contacto.php" method="POST">
+
                     <h2 class="h2form">Contáctanos</h2>
-
-                    <input type="text" placeholder="Tu nombre" required>
-                    <input type="email" placeholder="Tu correo electrónico" required>
-                    <input type="tel" placeholder="Tu número de teléfono">
-                    <textarea placeholder="Escribe tu mensaje..." rows="4" required></textarea>
-                    
+                                
+                    <input type="text" name="nombre" placeholder="Tu nombre" required>
+                    <input type="email" name="email" placeholder="Tu correo electrónico" required>
+                    <input type="tel" name="telefono" placeholder="Tu número de teléfono">
+                    <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="4" required></textarea>
+                                
                     <button type="submit" class="buttonform">Enviar</button>
-
+                                
                 </form>
             </div>
 
@@ -170,3 +170,46 @@
 
 </body>
     
+<?php
+$mensajeEstado = "";
+
+if ($_POST) {
+
+   
+    $nombre   = trim($_POST["nombre"] ?? "");
+    $correo   = trim($_POST["email"] ?? "");
+    $telefono = trim($_POST["telefono"] ?? "");
+    $mensaje  = trim($_POST["mensaje"] ?? "");
+
+    
+    if ($nombre === "" || $correo === "" || $mensaje === "") {
+        $mensajeEstado = "❌ Faltan campos obligatorios.";
+    } else {
+
+        
+        $para = "xavigarciaa.2008@gmail.com";
+
+      
+        $asunto = "Nuevo mensaje desde ciberteamfc.cat";
+
+       
+        $cuerpo  = "Nuevo mensaje desde el formulario web:\n\n";
+        $cuerpo .= "Nombre: $nombre\n";
+        $cuerpo .= "Correo: $correo\n";
+        $cuerpo .= "Teléfono: $telefono\n\n";
+        $cuerpo .= "Mensaje:\n$mensaje\n";
+
+       
+        $headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
+        $headers .= "Reply-To: $correo\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+      
+        if (mail($para, $asunto, $cuerpo, $headers)) {
+            $mensajeEstado = "✅ Mensaje enviado correctamente.";
+        } else {
+            $mensajeEstado = "❌ Error al enviar el mensaje.";
+        }
+    }
+}
+?>
