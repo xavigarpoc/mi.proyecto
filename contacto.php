@@ -1,3 +1,48 @@
+<?php
+$mensajeEstado = "";
+$envioCorrecto = false;
+
+if ($_POST) {
+
+   
+    $nombre   = trim($_POST["nombre"] ?? "");
+    $correo   = trim($_POST["email"] ?? "");
+    $telefono = trim($_POST["telefono"] ?? "");
+    $mensaje  = trim($_POST["mensaje"] ?? "");
+
+    
+    if ($nombre === "" || $correo === "" || $mensaje === "") {
+        $mensajeEstado = "❌ Faltan campos obligatorios.";
+    } else {
+
+        
+        $para = "xavigarciaa.2008@gmail.com";
+
+      
+        $asunto = "Nuevo mensaje desde ciberteamfc.cat";
+
+       
+        $cuerpo  = "Nuevo mensaje desde el formulario web:\n\n";
+        $cuerpo .= "Nombre: $nombre\n";
+        $cuerpo .= "Correo: $correo\n";
+        $cuerpo .= "Teléfono: $telefono\n\n";
+        $cuerpo .= "Mensaje:\n$mensaje\n";
+
+       
+        $headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
+        $headers .= "Reply-To: $correo\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+      
+        if (mail($para, $asunto, $cuerpo, $headers)) {
+            $envioCorrecto = true;
+        } else {
+            $mensajeEstado = "❌ Error al enviar el mensaje.";
+        }
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -34,7 +79,7 @@
                 <li><a href="http://ciberteamfc.cat/noticias.html">Noticias</a></li>
                 <li><a href="http://ciberteamfc.cat/entradas.html">Entradas</a></li>
                 <li><a href="http://ciberteamfc.cat/tienda.html">Tienda</a></li>
-                <li><a href="http://ciberteamfc.cat/contacto.html">Contacto</a></li>
+                <li><a href="http://ciberteamfc.cat/contacto.php">Contacto</a></li>
             </ul>
         </nav>
     </header>
@@ -168,48 +213,24 @@
     };
     </script>
 
+    <?php if ($envioCorrecto): ?>
+        <div id="popup" class="popup">
+            <div class="popup-contenido">
+                <h2>Mensaje enviado</h2>
+                <p>Gracias por contactar con Ciberteam FC.
+                <br>
+                Te responderemos lo antes posible.</p>
+                <button onclick="cerrarPopup()">Aceptar</button>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <script>
+        function cerrarPopup() {
+        document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
 </body>
     
-<?php
-$mensajeEstado = "";
-
-if ($_POST) {
-
-   
-    $nombre   = trim($_POST["nombre"] ?? "");
-    $correo   = trim($_POST["email"] ?? "");
-    $telefono = trim($_POST["telefono"] ?? "");
-    $mensaje  = trim($_POST["mensaje"] ?? "");
-
-    
-    if ($nombre === "" || $correo === "" || $mensaje === "") {
-        $mensajeEstado = "❌ Faltan campos obligatorios.";
-    } else {
-
-        
-        $para = "xavigarciaa.2008@gmail.com";
-
-      
-        $asunto = "Nuevo mensaje desde ciberteamfc.cat";
-
-       
-        $cuerpo  = "Nuevo mensaje desde el formulario web:\n\n";
-        $cuerpo .= "Nombre: $nombre\n";
-        $cuerpo .= "Correo: $correo\n";
-        $cuerpo .= "Teléfono: $telefono\n\n";
-        $cuerpo .= "Mensaje:\n$mensaje\n";
-
-       
-        $headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
-        $headers .= "Reply-To: $correo\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-      
-        if (mail($para, $asunto, $cuerpo, $headers)) {
-            $mensajeEstado = "✅ Mensaje enviado correctamente.";
-        } else {
-            $mensajeEstado = "❌ Error al enviar el mensaje.";
-        }
-    }
-}
-?>
+</html>
