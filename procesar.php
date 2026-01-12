@@ -1,45 +1,55 @@
+?>
+
 <?php
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    echo "Acceso no permitido.";
-    exit;
+$envioCorrecto = false;
+
+// CONEXIÓN A LA BASE DE DATOS
+$conexion = new mysqli(
+    "localhost",
+    "cibert91492025",
+    "OO!ig&0YLBue",
+    "ciberteamfc_cat"
+);
+
+if ($conexion->connect_error) {
+    die("Error de conexión");
 }
 
-// Recoger y limpiar datos
-$nombre   = trim($_POST["nombre"] ?? "");
-$correo   = trim($_POST["email"] ?? "");
-$telefono = trim($_POST["telefono"] ?? "");
-$mensaje  = trim($_POST["mensaje"] ?? "");
+if ($_POST) {
 
-// Validación básica
-if ($nombre === "" || $correo === "" || $mensaje === "") {
-    echo "Faltan campos obligatorios.";
-    exit;
-}
+    $nombre   = trim($_POST["nombre"] ?? "");
+    $correo   = trim($_POST["email"] ?? "");
+    $telefono = trim($_POST["telefono"] ?? "");
+    $mensaje  = trim($_POST["mensaje"] ?? "");
 
-// Email destino
-$para = "xavigarciaa.2008@gmail.com";
+    if ($nombre !== "" && $correo !== "" && $mensaje !== "") {
 
-// Asunto
-$asunto = "Nuevo mensaje desde ciberteamfc.cat";
+        // GUARDAR EN LA TABLA envios_web
+        $stmt = $conexion->prepare(
+            "INSERT INTO envios_web (nombre, email, telefono, mensaje)
+             VALUES (?, ?, ?, ?)"
+        );
 
-// Cuerpo del mensaje
-$cuerpo = "Has recibido un nuevo mensaje desde el formulario web:\n\n";
-$cuerpo .= "Nombre: $nombre\n";
-$cuerpo .= "Correo: $correo\n";
-$cuerpo .= "Teléfono: $telefono\n\n";
-$cuerpo .= "Mensaje:\n$mensaje\n";
+        $stmt->bind_param("ssss", $nombre, $correo, $telefono, $mensaje);
+        $stmt->execute();
+        $stmt->close();
 
-// Cabeceras (MUY IMPORTANTE)
-$headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
-$headers .= "Reply-To: $correo\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+        // (opcional) envío de email
+        $para = "xavigarciaa.2008@gmail.com";
+        $asunto = "Nuevo mensaje desde la web";
 
-// Enviar correo
-if (mail($para, $asunto, $cuerpo, $headers)) {
-    echo "<h2>Mensaje enviado correctamente</h2>";
-    echo "<a href='contacto.html'>Volver</a>";
-} else {
-    echo "<h2>Error al enviar el mensaje</h2>";
-    echo "<a href='contacto.html'>Volver</a>";
+        $cuerpo  = "Nombre: $nombre\n";
+        $cuerpo .= "Email: $correo\n";
+        $cuerpo .= "Teléfono: $telefono\n\n";
+        $cuerpo .= "Mensaje:\n$mensaje\n";
+
+        $headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
+        $headers .= "Reply-To: $correo\r\n";
+        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
+
+        mail($para, $asunto, $cuerpo, $headers);
+
+        $envioCorrecto = true;
+    }
 }
 ?>

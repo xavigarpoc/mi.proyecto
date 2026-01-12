@@ -1,0 +1,62 @@
+<?php
+include("conexion.php");
+
+// Seleccionar solo productos activos
+$sql = "SELECT * FROM productos WHERE activo = 1";
+$resultado = $conexion->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Tienda Ciberteam FC</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="header1">
+    <!-- Tu header existente -->
+</header>
+
+<header class="header2">
+    <!-- Tu segundo header -->
+</header>
+
+<div class="tienda">
+
+<h1>Productos disponibles</h1>
+
+<div class="productos-container">
+
+<?php while ($producto = $resultado->fetch_assoc()) { ?>
+    <div class="producto">
+        <?php if (!empty($producto['imagen'])): ?>
+            <img src="<?= htmlspecialchars($producto['imagen']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>">
+        <?php endif; ?>
+
+        <h3><?= htmlspecialchars($producto['nombre']) ?></h3>
+        <p><?= htmlspecialchars($producto['descripción']) ?></p>
+        <p>Precio: <strong><?= number_format($producto['precio'], 2) ?> €</strong></p>
+        <p>Stock: <?= $producto['stock'] ?></p>
+        <p>Categoría: <?= htmlspecialchars($producto['categoria']) ?></p>
+
+        <!-- Formulario para añadir al carrito -->
+        <form method="POST" action="carrito.php">
+            <input type="hidden" name="id_producto" value="<?= $producto['id_producto'] ?>">
+            <input type="number" name="cantidad" value="1" min="1" max="<?= $producto['stock'] ?>">
+            <button type="submit">Añadir al carrito</button>
+        </form>
+    </div>
+<?php } ?>
+
+</div> <!-- Fin productos-container -->
+
+</div> <!-- Fin tienda -->
+
+<footer class="footer">
+    <!-- Tu footer existente -->
+</footer>
+
+</body>
+</html>

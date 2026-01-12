@@ -1,60 +1,4 @@
-<?php
-$mensajeEstado = "";
-$envioCorrecto = false;
-
-/* CONEXIÓN A LA BASE DE DATOS */
-$host = "localhost";
-$usuarioBD = "cibert91492025";
-$passwordBD = "OO!ig&0YLBue";
-$bd = "ciberteam";
-
-$conexion = new mysqli($host, $usuarioBD, $passwordBD, $bd);
-if ($conexion->connect_error) {
-    die("Error de conexión a la base de datos");
-}
-
-if ($_POST) {
-
-    $nombre   = trim($_POST["nombre"] ?? "");
-    $correo   = trim($_POST["email"] ?? "");
-    $telefono = trim($_POST["telefono"] ?? "");
-    $mensaje  = trim($_POST["mensaje"] ?? "");
-
-    if ($nombre === "" || $correo === "" || $mensaje === "") {
-        $mensajeEstado = "❌ Faltan campos obligatorios.";
-    } else {
-
-        $para = "xavigarciaa.2008@gmail.com";
-        $asunto = "Nuevo mensaje desde ciberteamfc.cat";
-
-        $cuerpo  = "Nombre: $nombre\n";
-        $cuerpo .= "Correo: $correo\n";
-        $cuerpo .= "Teléfono: $telefono\n\n";
-        $cuerpo .= "Mensaje:\n$mensaje\n";
-
-        $headers  = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
-        $headers .= "Reply-To: $correo\r\n";
-        $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-
-        if (mail($para, $asunto, $cuerpo, $headers)) {
-
-            $stmt = $conexion->prepare(
-                "INSERT INTO envios_web (Nombre, Email, Telefono, Mensaje) VALUES (?, ?, ?, ?)"
-            );
-            $stmt->bind_param("ssss", $nombre, $correo, $telefono, $mensaje);
-            $stmt->execute();
-            $stmt->close();
-
-            $envioCorrecto = true;
-        } else {
-            $mensajeEstado = "❌ Error al enviar el mensaje.";
-        }
-    }
-}
-
-$conexion->close();
-?>
-
+<?php session_start(); ?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -67,7 +11,7 @@ $conexion->close();
 <body>
     <header class="header1">
         <nav class="navbar">
-           
+        
             <div class="flex-header">
 
            <div class="menu-toggle" id="menu-toggle"> &#9776; </div>
@@ -77,7 +21,7 @@ $conexion->close();
             </a>
 
             </div> 
-
+            
             <ul>
                 <li><a href="http://ciberteamfc.cat/index.html">Inicio</a></li>
                 <li class="dropdown">
@@ -105,7 +49,7 @@ $conexion->close();
             
 
             <input type="text" placeholder="Buscar" class="search-box">
-
+                
                 <div>
                     <span class="span1">Síguenos</span>
                 </div>
@@ -127,44 +71,93 @@ $conexion->close();
         </div>
     </header>
 
-    <main>
-        <div class="titulopag">
-            <h1>CONTACTO</h1>
-        </div>
+<main>
 
-        <div class="divscontacto">
-            <div class="divcontacto">
-                <form class="formcontacto" action="contacto.php" method="POST">
+<h1 class="titulo-form">Datos del pedido</h1>
+<div class="form-pedido-container">
 
-                    <h2 class="h2form">Contáctanos</h2>
-                                
-                    <input type="text" name="nombre" placeholder="Tu nombre" required>
-                    <input type="email" name="email" placeholder="Tu correo electrónico" required>
-                    <input type="tel" name="telefono" placeholder="Tu número de teléfono">
-                    <textarea name="mensaje" placeholder="Escribe tu mensaje..." rows="4" required></textarea>
-                                
-                    <button type="submit" class="buttonform">Enviar</button>
-                                
-                </form>
-            </div>
+<form action="procesar_pedido.php" method="POST" class="form-pedido">
 
-            <div class="divcontacto3">
-                <iframe
-                src="https://www.google.com/maps?q=Calle+Gran+Vía,+Madrid,+España&output=embed"
-                width="740"
-                height="450"
-                style="border:0;"
-                allowfullscreen=""
-                loading="lazy">
-                </iframe> 
-            </div>
-        </div>
+    <!-- DATOS PERSONALES -->
+    <label>Nombre *</label>
+    <input type="text" name="nombre" required>
 
-        <div class="divcontacto2"></div>
-    
-    </main>
-    
-    <footer class="footer">
+    <label>Apellidos *</label>
+    <input type="text" name="apellidos" required>
+
+    <label>DNI *</label>
+    <input type="text" name="dni" maxlength="9" required>
+
+    <label>Teléfono de contacto *</label>
+    <input type="tel" name="telefono" required>
+
+    <label>Email *</label>
+    <input type="email" name="email" required>
+
+    <!-- DIRECCIÓN -->
+    <label>Dirección *</label>
+    <input type="text" name="direccion" id="direccion" required>
+
+    <button type="button" onclick="obtenerDireccion()">Usar mi ubicación actual</button>
+
+    <label>Código Postal *</label>
+    <input type="text" name="cp" required>
+
+    <label>Población *</label>
+    <input type="text" name="poblacion" required>
+
+    <label>Provincia *</label>
+    <input type="text" name="provincia" required>
+
+    <!-- MÉTODO DE PAGO -->
+    <label>Forma de pago *</label>
+
+    <div class="metodos-pago">
+        <label>
+            <input type="radio" name="metodo_pago" value="tarjeta" required>
+            Tarjeta de crédito / débito
+        </label>
+
+        <label>
+            <input type="radio" name="metodo_pago" value="bizum">
+            Bizum
+        </label>
+
+        <label>
+            <input type="radio" name="metodo_pago" value="paypal">
+            PayPal
+        </label>
+
+        <label>
+            <input type="radio" name="metodo_pago" value="reembolso">
+            Contra reembolso
+        </label>
+    </div>
+
+    <!-- DATOS TARJETA -->
+    <div id="pago-tarjeta" style="display:none;">
+        <label>Número de tarjeta</label>
+        <input type="text" name="numero_tarjeta" placeholder="XXXX XXXX XXXX XXXX">
+
+        <label>Fecha de caducidad</label>
+        <input type="text" name="caducidad" placeholder="MM/AA">
+
+        <label>CVV</label>
+        <input type="text" name="cvv" placeholder="123">
+    </div>
+
+    <!-- DATOS BIZUM -->
+    <div id="pago-bizum" style="display:none;">
+        <label>Teléfono Bizum</label>
+        <input type="text" name="telefono_bizum">
+    </div>
+
+    <button type="submit">Confirmar pedido</button>
+
+</form>
+</div>
+
+ <footer class="footer">
         <div class="footer1">
             <div class="footer1.1">
                 <h1>Ciberteam FC</h1>
@@ -199,11 +192,11 @@ $conexion->close();
             </div>
             <h5 class="textofinal">Copyright CiberteamFC Página oficial del CiberteamFC</h5> 
             <h5 class="textofinal2">Terminos legales | Politica de Privavidad | Cookies | Accesibilidad | Centro de ayuda/FAQs | Gestión del consentimiento | Consent choices</h5>
+            
         </div>
 
     </footer>
-
-    <script>
+     <script>
         const toggle = document.getElementById("menu-toggle");
         const header1 = document.querySelector(".header1");
 
@@ -212,7 +205,6 @@ $conexion->close();
         });
     </script>
     
-
     <button id="btnTop">⇧</button>
 
     <script>
@@ -226,24 +218,80 @@ $conexion->close();
     };
     </script>
 
-    <?php if ($envioCorrecto): ?>
-        <div id="popup" class="popup">
-            <div class="popup-contenido">
-                <h2>Mensaje enviado</h2>
-                <p>Gracias por contactar con Ciberteam FC.
-                <br>
-                Te responderemos lo antes posible.</p>
-                <button onclick="cerrarPopup()">Aceptar</button>
-            </div>
-        </div>
-    <?php endif; ?>
-
     <script>
-        function cerrarPopup() {
-        document.getElementById("popup").style.display = "none";
+        function obtenerDireccion() {
+            if (!navigator.geolocation) {
+                alert("Tu navegador no soporta geolocalización");
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+
+                    // OpenStreetMap (Nominatim)
+                    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.display_name) {
+                                document.getElementById("direccion").value = data.display_name;
+                            } else {
+                                alert("No se pudo obtener la dirección");
+                            }
+                        })
+                        .catch(() => {
+                            alert("Error al obtener la dirección");
+                        });
+                },
+                function () {
+                    alert("Permiso de ubicación denegado");
+                }
+            );
         }
     </script>
 
+    <script>
+function obtenerDireccion() {
+    if (!navigator.geolocation) {
+        alert("Tu navegador no soporta geolocalización");
+        return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+        function (position) {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("direccion").value = data.display_name;
+                })
+                .catch(() => alert("Error al obtener la dirección"));
+        },
+        () => alert("Permiso de ubicación denegado")
+    );
+}
+
+const radios = document.querySelectorAll('input[name="metodo_pago"]');
+const tarjeta = document.getElementById("pago-tarjeta");
+const bizum = document.getElementById("pago-bizum");
+
+radios.forEach(radio => {
+    radio.addEventListener("change", () => {
+        tarjeta.style.display = "none";
+        bizum.style.display = "none";
+
+        if (radio.value === "tarjeta") {
+            tarjeta.style.display = "block";
+        }
+        if (radio.value === "bizum") {
+            bizum.style.display = "block";
+        }
+    });
+});
+</script>
+
+
 </body>
-    
-</html>
