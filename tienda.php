@@ -76,53 +76,35 @@ $resultado = $conexion->query($sql);
 <div class="titulopag"><h1>TIENDA</h1></div>
 <div class="barraseparar"><h1>Novedades</h1></div>
 
-
 <div class="tiendadiv">
 
-<?php
-$productos_fijos = [
-    ["id"=>1,"nombre"=>"Pantalones 2025/2026","precio"=>14.99,"img"=>"camisetatienda.jpg"],
-    ["id"=>2,"nombre"=>"Gorra del club","precio"=>39.99,"img"=>"gorratienda.jpg"],
-    ["id"=>3,"nombre"=>"Chandal del club","precio"=>99.99,"img"=>"chandaldelclub.jpg"],
-    ["id"=>4,"nombre"=>"Pantalones del club","precio"=>59.99,"img"=>"camisetatienda.jpg"],
-    ["id"=>5,"nombre"=>"Bufanda del club","precio"=>9.99,"img"=>"bufandaciberteam.jpg"],
-    ["id"=>6,"nombre"=>"Gorro del club","precio"=>7.99,"img"=>"gorrociberteam.jpg"]
-];
-
-foreach ($productos_fijos as $p) {
-?>
-<div class="productostienda">
-    <img src="http://ciberteamfc.cat/img/tienda/<?php echo $p['img']; ?>" class="imgtienda">
-    <h2 class="textotienda"><?php echo $p['nombre']; ?></h2>
-    <p class="preciotienda"><?php echo number_format($p['precio'],2); ?> €</p>
-
-    <form action="carrito.php" method="POST">
-        <input type="hidden" name="id_producto" value="<?php echo $p['id']; ?>">
-        <input type="hidden" name="nombre" value="<?php echo $p['nombre']; ?>">
-        <input type="hidden" name="precio" value="<?php echo $p['precio']; ?>">
-        <button type="submit" class="btnnoticia1">Comprar</button>
-    </form>
-</div>
-
-<?php } ?>
-
-</div>
-
-<div class="tiendadiv">
 <?php while ($producto = $resultado->fetch_assoc()) { ?>
-<div class="productostienda">
-    <img src="<?php echo $producto['imagen']; ?>" class="imgtienda">
-    <h2 class="textotienda"><?php echo $producto['nombre']; ?></h2>
-    <p class="preciotienda"><?php echo number_format($producto['precio'],2); ?> €</p>
+    <div class="productostienda">
 
-    <form action="carrito.php" method="POST">
-        <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
-        <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
-        <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
-        <button type="submit" class="btnnoticia1">Comprar</button>
-    </form>
-</div>
+        <img 
+          src="http://ciberteamfc.cat/img/tienda/<?php echo $producto['imagen']; ?>" 
+          class="imgtienda"
+          alt="<?php echo $producto['nombre']; ?>"
+        >
+
+        <h2 class="textotienda">
+            <?php echo $producto['nombre']; ?>
+        </h2>
+
+        <p class="preciotienda">
+            <?php echo number_format($producto['precio'], 2); ?> €
+        </p>
+
+        <form action="carrito.php" method="POST">
+            <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
+            <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
+            <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
+            <button type="submit" class="btnnoticia1">Comprar</button>
+        </form>
+
+    </div>
 <?php } ?>
+
 </div>
 
 </main>

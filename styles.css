@@ -597,22 +597,6 @@ html {
   margin-bottom: 25px;
 }
 
-.tiendadiv {
-  background-color: #5C86A2;
-  border-radius: 10px;
-  margin: 0 auto; 
-  margin-bottom: 20px;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-  margin: 0 20px 20px 20px; 
-  flex-wrap: wrap; 
-  justify-content: space-between; 
-  gap: 20px; 
-  width: 80%;
-}
-
 .tiendadiv2 {
   margin-right: 300px;
   margin-left: 300px;
@@ -622,13 +606,6 @@ html {
   align-content: center;
 }
 
-.imgtienda {
-  width: 100%;
-  max-width: 300px;
-  border-radius: 10px;
-  padding: 10px;
-}
-
 .imgtienda2 {
   width: 300px;
   border-radius: 10px;
@@ -636,43 +613,65 @@ html {
   margin-left: 40px;
 }
 
-.textotienda {
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
 
 .productostienda p {
   margin: 6px 0;
   font-size: 15px;
 }
 
-.preciotienda {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 10px;
+.productostienda:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
 }
 
-.productostienda p:last-of-type {
-  font-weight: bold;
-  font-size: 17px;
-  margin-top: 10px;
+.tiendadiv {
+  background-color: #5C86A2;
+  border-radius: 10px;
+  margin: 0 auto 20px auto;
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-around; 
+  gap: 30px; 
+  width: 80%;
 }
+
+
 .productostienda {
   background-color: rgba(255, 255, 255, 0.15);
-  padding: 25px 20px;
+  padding: 40px 30px; 
   border-radius: 15px;
   color: #fff;
   text-align: center;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
-  flex-basis: 30%; 
+  flex-basis: 48%; 
+  margin-bottom: 30px;
+}
+
+.imgtienda {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.textotienda {
+  font-size: 28px;
+  font-weight: bold;
   margin-bottom: 20px;
 }
 
-.productostienda:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.35);
+.preciotienda {
+  font-size: 22px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.productostienda p:last-of-type {
+  font-weight: bold;
+  font-size: 24px;
+  margin-top: 15px;
 }
 
 /* EQUIPOS */

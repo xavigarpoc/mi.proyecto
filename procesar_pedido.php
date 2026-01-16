@@ -1,24 +1,111 @@
 <?php
 session_start();
+$carrito = isset($_SESSION['carrito']) ? $_SESSION['carrito'] : [];
 
 if (
-    !isset($_POST['nombre'], $_POST['email'], $_POST['direccion']) ||
-    !isset($_SESSION['carrito']) ||
-    empty($_SESSION['carrito'])
+    !isset($_POST['nombre'], $_POST['apellidos'], $_POST['dni'], $_POST['telefono'], $_POST['email'], $_POST['direccion'], $_POST['cp'], $_POST['poblacion'], $_POST['provincia'], $_POST['metodo_pago'])
 ) {
-    die("Acceso no válido");
+    die("Datos incompletos del formulario");
 }
 
+//POST datos del formulario
 $nombre = $_POST['nombre'];
+$apellidos = $_POST['apellidos'];
+$dni = $_POST['dni'];
+$telefono = $_POST['telefono'];
 $email = $_POST['email'];
 $direccion = $_POST['direccion'];
-$carrito = $_SESSION['carrito'];
+$cp = $_POST['cp'];
+$poblacion = $_POST['poblacion'];
+$provincia = $_POST['provincia'];
+$metodo_pago = $_POST['metodo_pago'];
+$base = $_POST['preciobase'];
 
-$total = 0;
+
+//Datos tarjeta o bizum
+$numero_tarjeta = isset($_POST['numero_tarjeta']) ? $_POST['numero_tarjeta'] : null;
+$caducidad = isset($_POST['caducidad']) ? $_POST['caducidad'] : null;
+$cvv = isset($_POST['cvv']) ? $_POST['cvv'] : null;
+$telefono_bizum = isset($_POST['telefono_bizum']) ? $_POST['telefono_bizum'] : null;
+
+// CÁLCULO DE PRECIOS
+$base = 0;
+
 foreach ($carrito as $item) {
+
     $cantidad = isset($item['cantidad']) ? $item['cantidad'] : 1;
-    $total += $item['precio'] * $cantidad;
+    $precio_unitario = (floatval($item['precio']));
+    $descuento = isset($item['descuento']) ? $item['descuento'] : 0;
+    $base += ($precio_unitario * $cantidad) - $descuento;
+
+    $subtotal = ($precio_unitario * $cantidad) - $descuento;
 }
+
+    $iva = $base * 0.21;  
+    $total = $base + $iva;
+
+// CONEXION A LA BBDD
+$conexion = new mysqli("localhost", "cibert91492025", "OO!ig&0YLBue", "ciberteam");
+if ($conexion->connect_error) die("Error de conexión: " . $conexion->connect_error);
+
+$estado = "pendiente";  
+
+// TABLA PEDIDOS
+$stmt = $conexion->prepare("
+    INSERT INTO pedidos (
+        nombre, apellidos, dni, telefono, email, direccion, cp, poblacion, provincia,
+        metodo_pago, preciobase, iva, total, estado
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
+
+$stmt->bind_param(
+    "ssssssssssddds", $nombre, $apellidos, $dni, $telefono, $email, $direccion, $cp, $poblacion, $provincia, $metodo_pago, $base, $iva, $total, $estado
+);
+$stmt->execute();
+$id_pedido = $conexion->insert_id; 
+$stmt->close();
+
+// TABLA articulos_pedidos
+$stmt = $conexion->prepare("
+INSERT INTO articulos_pedidos 
+(id_pedido, id_producto, nombre, cantidad, precio_unitario, descuento, subtotal)
+VALUES (?, ?, ?, ?, ?, ?, ?)
+");
+
+foreach ($carrito as $item) {
+    $id_producto = $item['id'];
+    $nombre = $item['nombre'];  
+    $cantidad = $item['cantidad'];
+    $precio = $item['precio'];
+    $descuento = $item['descuento'] ?? 0;
+    $subtotal = ($precio * $cantidad) - $descuento;
+
+    $stmt->bind_param("iisiddd",
+        $id_pedido,
+        $id_producto,
+        $nombre,
+        $cantidad,
+        $precio,
+        $descuento,
+        $subtotal
+    );
+    $stmt->execute();
+}
+
+$stmt->close();
+
+// TABLA PAGOS
+$stmt = $conexion->prepare("
+INSERT INTO pagos (id_pedido, numero_tarjeta, caducidad, cvv, telefono_bizum, precio_total)
+VALUES (?, ?, ?, ?, ?, ?)
+");
+$stmt->bind_param("issssd", $id_pedido, $numero_tarjeta, $caducidad, $cvv, $telefono_bizum, $total);
+$stmt->execute();
+$stmt->close();
+
+$conexion->close();
+unset($_SESSION['carrito']);
 ?>
 
 <!DOCTYPE html>
@@ -87,7 +174,6 @@ foreach ($carrito as $item) {
     </div>
 </header>
 
-<body>
 <div class="divprocesar">
 
 <h1>Pedido confirmado</h1>
@@ -98,15 +184,16 @@ foreach ($carrito as $item) {
 
 <h2>Resumen del pedido</h2>
 
-<?php foreach ($carrito as $item) { ?>
     <p>
         <?php echo htmlspecialchars($item['nombre']); ?> -
-        <?php echo number_format($item['precio'],2); ?> €
-        (x<?php echo isset($item['cantidad']) ? $item['cantidad'] : 1; ?>)
+        <?php echo number_format($item['precio'], 2); ?> €
+        (x<?php echo $cantidad; ?>)
     </p>
-<?php } ?>
+<?php ?>
 
-<p><strong>Total: <?php echo number_format($total, 2); ?> €</strong></p>
+<p><strong>Base imponible:</strong> <?php echo number_format($base, 2); ?> €</p>
+<p><strong>IVA (21%):</strong> <?php echo number_format($iva, 2); ?> €</p>
+<p><strong>Total:</strong> <?php echo number_format($total, 2); ?> €</p>
 
 </div>
 
@@ -152,8 +239,3 @@ foreach ($carrito as $item) {
     </footer>
 
 </html>
-
-<?php
-unset($_SESSION['carrito']);
-?>
-
