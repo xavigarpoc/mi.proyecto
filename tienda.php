@@ -92,13 +92,23 @@ $resultado = $conexion->query($sql);
         </h2>
 
         <p class="preciotienda">
-            <?php echo number_format($producto['precio'], 2); ?> €
+            <?php if($producto['descuento'] > 0): ?>
+                <span style="text-decoration: line-through;">
+                    <?php echo number_format($producto['precio'], 2); ?> €
+                </span>
+                <span style="color: red; font-weight: bold;">
+                    <?php echo number_format($producto['precio'] - $producto['descuento'], 2); ?> €
+                </span>
+            <?php else: ?>
+                <?php echo number_format($producto['precio'], 2); ?> €
+            <?php endif; ?>
         </p>
 
         <form action="carrito.php" method="POST">
             <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
             <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
             <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
+            <input type="hidden" name="descuento" value="<?php echo $producto['descuento']; ?>">
             <button type="submit" class="btnnoticia1">Comprar</button>
         </form>
 

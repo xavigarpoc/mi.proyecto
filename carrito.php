@@ -6,17 +6,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id_producto'])) {
 
     $id = $_POST['id_producto'];
 
-    if (!isset($_SESSION['carrito'][$id])) {
-        $_SESSION['carrito'][$id] = [
-            'id' => $id,
-            'nombre' => $_POST['nombre'],
-            'precio' => $_POST['precio'],
-            'cantidad' => 1
-        ];
-    } else {
-        $_SESSION['carrito'][$id]['cantidad']++;
-    }
-}
+            if (!isset($_SESSION['carrito'][$id])) {
+                $_SESSION['carrito'][$id] = [
+                    'id' => $id,
+                    'nombre' => $_POST['nombre'],
+                    'precio' => $_POST['precio'],
+                    'descuento' => isset($_POST['descuento']) ? $_POST['descuento'] : 0, // <- NUEVO
+                    'cantidad' => 1
+                ];
+            } else {
+                $_SESSION['carrito'][$id]['cantidad']++;
+            }
+        }
 
 /* MODIFICAR CANTIDAD / ELIMINAR */
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'], $_POST['id'])) {
@@ -47,10 +48,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['accion'], $_POST['id'
 
 <?php
 $total_carrito = 0;
-
 if (!empty($_SESSION['carrito'])) {
     foreach ($_SESSION['carrito'] as $item) {
-        $total_carrito += $item['precio'] * $item['cantidad'];
+        $precio_con_descuento = $item['precio'] - $item['descuento'];
+        $total_carrito += $precio_con_descuento * $item['cantidad'];
     }
 }
 ?>
@@ -124,10 +125,14 @@ if (!empty($_SESSION['carrito'])) {
         ?>
         <div class="productostienda3">
             <h1 class="textotienda3"><?php echo $item['nombre']; ?></h1>
-            <p class="textotienda4">Precio: <?php echo number_format($item['precio'], 2); ?> €</p>
-            <p class="textotienda4">Cantidad: <?php echo $item['cantidad']; ?></p>
-            <p class="textotienda4">Total: <?php echo number_format($item['precio'] * $item['cantidad'], 2); ?> €</p>
-
+            <?php 
+                $precio_con_descuento = $item['precio'] - $item['descuento'];
+                $subtotal = $precio_con_descuento * $item['cantidad'];
+                ?>
+                <p class="textotienda4">Precio: <?php echo number_format($precio_con_descuento, 2); ?> €</p>
+                <p class="textotienda4">Total: <?php echo number_format($subtotal, 2); ?> €</p>
+                <p class="textotienda4">Cantidad: <?php echo $item['cantidad']; ?></p>
+           
             <div class="botones-carrito3">
                 <form method="POST">
                     <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
