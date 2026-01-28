@@ -8,6 +8,9 @@
         die("Datos incompletos del formulario");
     }
 
+    $conexion->set_charset("utf8");
+
+    
     //POST datos del formulario
     $nombre = $_POST['nombre'];
     $apellidos = $_POST['apellidos'];
@@ -107,6 +110,41 @@
 
     $conexion->close();
     unset($_SESSION['carrito']);
+
+    /* ENVIO EMAIL DE CONFIRMACIÓN */
+
+    $para = $email;
+    $asunto = "Confirmación de tu pedido - Ciberteam FC";
+
+    /* Mensaje */
+    $mensaje = "Hola,\n\n";
+    $mensaje .= "Gracias por tu compra en Ciberteam FC.\n\n";
+    $mensaje .= "Número de pedido: $id_pedido\n\n";
+    $mensaje .= "RESUMEN DEL PEDIDO:\n";
+
+    foreach ($carrito as $item) {
+        $precio_con_descuento = $item['precio'] - (isset($item['descuento']) ? $item['descuento'] : 0);
+        $mensaje .= "- " . $item['nombre'] . " | ";
+        $mensaje .= "Cantidad: " . $item['cantidad'] . " | ";
+        $mensaje .= "Precio: " . number_format($precio_con_descuento, 2) . " €\n";
+    }
+
+    $mensaje .= "\nBase imponible: " . number_format($base, 2) . " €";
+    $mensaje .= "\nIVA (21%): " . number_format($iva, 2) . " €";
+    $mensaje .= "\nTOTAL: " . number_format($total, 2) . " €\n\n";
+
+    $mensaje .= "Dirección de envío:\n";
+    $mensaje .= "$direccion\n$cp - $poblacion ($provincia)\n\n";
+    $mensaje .= "Método de pago: $metodo_pago\n\n";
+    $mensaje .= "Gracias por confiar en nosotros.\n";
+    $mensaje .= "Ciberteam FC";
+
+    // Cabeceras
+    $cabeceras = "From: Ciberteam FC <no-reply@ciberteamfc.cat>\r\n";
+    $cabeceras .= "Content-Type: text/plain; charset=UTF-8";
+
+    // Envío
+    mail($para, $asunto, $mensaje, $cabeceras);
     ?>
 
     <!DOCTYPE html>
@@ -139,7 +177,7 @@
                     </ul>
                 </li>
                 <li><a href="http://ciberteamfc.cat/equipos.html">Equipos</a></li>
-                <li><a href="http://ciberteamfc.cat/noticias.html">Noticias</a></li>
+                <li><a href="http://ciberteamfc.cat/noticias.php">Noticias</a></li>
                 <li><a href="http://ciberteamfc.cat/entradas.html">Entradas</a></li>
                 <li><a href="http://ciberteamfc.cat/tienda.html">Tienda</a></li>
                 <li><a href="http://ciberteamfc.cat/contacto.php">Contacto</a></li>

@@ -89,7 +89,7 @@ $conexion->close();
                     </ul>
                 </li>
                 <li><a href="http://ciberteamfc.cat/equipos.html">Equipos</a></li>
-                <li><a href="http://ciberteamfc.cat/noticias.html">Noticias</a></li>
+                <li><a href="http://ciberteamfc.cat/noticias.php">Noticias</a></li>
                 <li><a href="http://ciberteamfc.cat/entradas.html">Entradas</a></li>
                 <li><a href="http://ciberteamfc.cat/tienda.php">Tienda</a></li>
                 <li><a href="http://ciberteamfc.cat/contacto.php">Contacto</a></li>

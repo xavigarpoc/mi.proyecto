@@ -1,14 +1,30 @@
 <?php
-include("conexion.php");
+$conexion = new mysqli("localhost", "cibert91492025", "OO!ig&0YLBue", "ciberteam");
+if ($conexion->connect_error) {
+    die("Error de conexión");
+}
 
-$sql = "SELECT * FROM productos WHERE activo = 1";
-$resultado = $conexion->query($sql);
+$conexion->set_charset("utf8");
+
+$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+
+$stmt = $conexion->prepare("
+    SELECT titulo, subtitulo, contenido, imagen, fecha_publicacion
+    FROM noticias
+    WHERE id = ? AND estado = 'publicada'
+");
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$noticia = $resultado->fetch_assoc();
+
+if (!$noticia) {
+    die("Noticia no encontrada");
+}
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ciberteam FC</title>
     <link rel="stylesheet" href="styles.css">
@@ -20,10 +36,9 @@ $resultado = $conexion->query($sql);
         <div class="flex-header">
             <div class="menu-toggle" id="menu-toggle">&#9776;</div>
             <a href="http://ciberteamfc.cat/index.html" class="headermovil">
-                <img src="http://ciberteamfc.cat/img/header/logoteam.png" class="logo">
+                <img src="http://ciberteamfc.cat/img/header/logoteam.png" alt="Logo Ciberteam FC" class="logo">
             </a>
-        </div>
-
+        </div> 
         <ul>
             <li><a href="http://ciberteamfc.cat/index.html">Inicio</a></li>
             <li class="dropdown">
@@ -37,7 +52,7 @@ $resultado = $conexion->query($sql);
             <li><a href="http://ciberteamfc.cat/equipos.html">Equipos</a></li>
             <li><a href="http://ciberteamfc.cat/noticias.php">Noticias</a></li>
             <li><a href="http://ciberteamfc.cat/entradas.html">Entradas</a></li>
-            <li><a href="http://ciberteamfc.cat/tienda.html">Tienda</a></li>
+            <li><a href="http://ciberteamfc.cat/tienda.php">Tienda</a></li>
             <li><a href="http://ciberteamfc.cat/contacto.php">Contacto</a></li>
         </ul>
     </nav>
@@ -46,80 +61,56 @@ $resultado = $conexion->query($sql);
 <header class="header2">
     <div class="top-bar">
         <a href="http://ciberteamfc.cat/index.html">
-            <img src="http://ciberteamfc.cat/img/header/logoteam.png" class="logo">
+            <img src="http://ciberteamfc.cat/img/header/logoteam.png" alt="Logo Ciberteam FC" class="logo">
         </a>
-
         <input type="text" placeholder="Buscar" class="search-box">
-
-        <div><span class="span1">Síguenos</span></div>
-
+        <span class="span1">Síguenos</span>
         <div class="logosheader">
             <img src="http://ciberteamfc.cat/img/header/logofacebook.png" class="logos">
             <img src="http://ciberteamfc.cat/img/header/logoyoutube.png" class="logos">
             <img src="http://ciberteamfc.cat/img/header/logolinkedin.png" class="logos">
             <img src="http://ciberteamfc.cat/img/header/logoinstagram.png" class="logos">
         </div>
-
         <div class="icons">
             <img src="http://ciberteamfc.cat/img/header/logocambioidioma.png" class="logosaparte1">
             <a href="carrito.php">
                 <img src="http://ciberteamfc.cat/img/header/logocarritocompra.png" class="logosaparte2">
             </a>
         </div>
-
         <button class="login-btn">Iniciar Sesión</button>
     </div>
 </header>
 
-<main>
+<main class="noticia-main">
 
-<div class="titulopag"><h1>TIENDA</h1></div>
-<div class="barraseparar"><h1>Novedades</h1></div>
+    <div class="noticia-container">
 
-<div class="tiendadiv">
+        <?php if ($noticia['imagen']): ?>
+            <div class="noticia-imagen">
+                <img src="img/noticias/<?php echo htmlspecialchars($noticia['imagen']); ?>" alt="<?php echo htmlspecialchars($noticia['titulo']); ?>">
+            </div>
+        <?php endif; ?>
 
-<?php while ($producto = $resultado->fetch_assoc()) { ?>
-    <div class="productostienda">
+        <div class="noticia-texto">
+            <h1 class="noticia-titulo"><?php echo htmlspecialchars($noticia['titulo']); ?></h1>
 
-        <img 
-          src="http://ciberteamfc.cat/img/tienda/<?php echo $producto['imagen']; ?>" 
-          class="imgtienda"
-          alt="<?php echo $producto['nombre']; ?>"
-        >
-
-        <h2 class="textotienda">
-            <?php echo $producto['nombre']; ?>
-        </h2>
-
-        <p class="preciotienda">
-            <?php if($producto['descuento'] > 0): ?>
-                <span style="text-decoration: line-through;">
-                    <?php echo number_format($producto['precio'], 2); ?> €
-                </span>
-                <span style="color: red; font-weight: bold;">
-                    <?php echo number_format($producto['precio'] - $producto['descuento'], 2); ?> €
-                </span>
-            <?php else: ?>
-                <?php echo number_format($producto['precio'], 2); ?> €
+            <?php if ($noticia['subtitulo']): ?>
+                <h3 class="noticia-subtitulo"><?php echo htmlspecialchars($noticia['subtitulo']); ?></h3>
             <?php endif; ?>
-        </p>
 
-        <form action="carrito.php" method="POST">
-            <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
-            <input type="hidden" name="nombre" value="<?php echo $producto['nombre']; ?>">
-            <input type="hidden" name="precio" value="<?php echo $producto['precio']; ?>">
-            <input type="hidden" name="descuento" value="<?php echo $producto['descuento']; ?>">
-            <button type="submit" class="btnnoticia1">Comprar</button>
-        </form>
+            <p class="noticia-contenido"><?php echo nl2br(htmlspecialchars($noticia['contenido'])); ?></p>
+
+            <small class="noticia-fecha">
+                Publicado el <?php echo date("d/m/Y H:i", strtotime($noticia['fecha_publicacion'])); ?>
+            </small>
+
+            <button onclick="window.history.back()" class="botonvolver">Volver a Noticias</button>
+        </div>
 
     </div>
-<?php } ?>
-
-</div>
 
 </main>
 
- 
     <footer class="footer">
         <div class="footer1">
             <div class="footer1.1">
@@ -158,12 +149,6 @@ $resultado = $conexion->query($sql);
         </div>
 
     </footer>
-
-<script>
-const toggle = document.getElementById("menu-toggle");
-const header1 = document.querySelector(".header1");
-toggle.addEventListener("click", () => header1.classList.toggle("active"));
-</script>
 
 </body>
 </html>

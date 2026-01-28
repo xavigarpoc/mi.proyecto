@@ -356,9 +356,8 @@ html {
 
 .noticiasportada {
   background-image: url(http://ciberteamfc.cat/img/noticias/estadio4k.jpg);
-  padding: 149.7px;
+  padding: clamp(80px, 10vw, 150px);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -374,15 +373,16 @@ html {
 }
 
 .btnmejorasestadio {
-  margin-top: 20px; 
-  padding: 15px 20px;
-  border: none;
+  margin-top: auto;
+  padding: 12px;
   border-radius: 8px;
+  border: none;
   background-color: black;
   color: white;
   font-size: 16px;
   cursor: pointer;
-  font-size: 20px;
+  text-align: center;
+  transition: background 0.3s ease;
 }
 
 .barraseparacion {
@@ -390,14 +390,28 @@ html {
   background-color: #5C86A2;
   margin-top: 0px;
   margin-bottom: 20px;
+  background-color: rgba(2, 46, 77, 0.85);
 }
 
+.noticiasimg {
+  width: 100%;
+  max-width: 500px;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  flex-shrink: 0;
+  border: 10px solid #3e6e8e;
+  box-sizing: border-box; 
+}
+
+
 .noticiasdivs {
-  display: flex;
-  justify-content: center;  
-  justify-items: center;
-  gap: 20px; 
-  margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 0 20px;
+  margin-bottom: 60px;
+  align-items: stretch;
 }
 
 .noticiasdiv1 {
@@ -441,20 +455,202 @@ html {
 }
 
 .noticias123 {
+  background-color: rgba(2, 46, 77, 0.06);
+  border-radius: 14px;
+  overflow: hidden;
   display: flex;
-  flex-direction: column; 
-  width: 800px;
+  height: 100%;
+  flex-direction: column;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 20px;
+  border-width: 20px;
+  border-color: rgba(2, 46, 77, 0.06);
+}
+
+
+.noticias123:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.18);
 }
 
 .textonoticias {
-  background-color: rgba(2, 46, 77, 0.8);
+  background-color: #3e6e8e;
   color: white;
-  margin-top: 10px;
-  padding: 20px 30px;
-  width: 636px;
-  margin-left: 70px;
-  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex-grow: 1;
 }
+
+.textonoticias h2 {
+  font-size: clamp(18px, 2vw, 22px);
+  margin: 0;
+}
+
+.textonoticias p {
+  font-size: 15px;
+  line-height: 1.4;
+  opacity: 0.9;
+}
+
+.smallfecha {
+  color: #b9b9b9;
+}
+
+.botonesnoticias {
+  border: 1px solid #ccc;
+}
+
+/* BUSCADOR NOTICIAS */
+.buscadornoticias {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin: 50px auto;
+  flex-wrap: wrap; /* por si no cabe */
+}
+
+/* Inputs normales */
+.botonesnoticias {
+  width: 180px;
+  height: 44px;
+  border-radius: 10px;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+/* Botones */
+.botonesnoticias2 {
+  width: 180px;
+  height: 44px;
+  border-radius: 10px;
+  background-color: #022e4d;
+  color: white;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.botonesnoticias2:hover {
+  background-color: #011e33;
+}
+
+.rango-fechas {
+  display: flex;
+  align-items: center;
+  height: 44px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 390px;
+}
+
+.texto-fecha {
+  color: #022e4d;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 10px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+
+}
+
+.rango-fechas input {
+  border: none;
+  height: 100%;
+  padding: 0 8px;
+  font-size: 14px;
+  width: 130px;
+}
+
+.rango-fechas input:focus {
+  outline: none;
+}
+
+
+/* NOTICIA */
+
+/* Contenedor principal */
+.noticia-main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+/* Contenedor de la noticia */
+.noticia-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    background-color: #5C86A2 ;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+/* Imagen */
+.noticia-imagen img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+/* Título */
+.noticia-titulo {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Subtítulo */
+.noticia-subtitulo {
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Contenido */
+.noticia-contenido {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #ffffff;
+    text-align: center;
+}
+
+/* Fecha */
+.noticia-fecha {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color:  #dadada;
+    text-align: right;
+}
+
+.botonvolver {
+    display: block;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color:  #dadada;
+    justify-items: right;
+    text-align: right;
+    justify-content: right;
+    padding: 10px;
+    background-color: black;
+    border-radius: 10px;
+} 
 
 /* ENTRADAS */
 
@@ -635,7 +831,6 @@ html {
   width: 80%;
 }
 
-
 .productostienda {
   background-color: rgba(255, 255, 255, 0.15);
   padding: 40px 30px; 
@@ -670,7 +865,7 @@ html {
 
 .productostienda p:last-of-type {
   font-weight: bold;
-  font-size: 24px;
+  font-size: 24px; 
   margin-top: 15px;
 }
 
@@ -1366,7 +1561,7 @@ a {
 #btnTop {
   position: fixed;
   bottom: 20px;
-  right: 20px;
+  right: 40px;
   background: #00235e;
   color: #ffffff;
   padding: 10px 17px;
@@ -2719,8 +2914,9 @@ footer {
     padding: 8px;
   }
 
-  .noticiasdivs {
-    gap: 15px;
+   .noticiasdivs {
+    grid-template-columns: repeat(3, 1fr);
+    padding: 0 80px;
   }
 
   .noticias123 {
@@ -2736,21 +2932,21 @@ footer {
     margin-left: 0;
   }
 
-  .noticiasdivs, 
   .noticiasportada {
     padding-left: 20px;
     padding-right: 20px;
   }
 
   .textonoticias {
-    width: 90%;
-    margin-left: 0;
-    padding: 1.2rem;
-    text-align: center;
+    padding: 24px;
   }
 
   .textonoticias h2 {
-    font-size: 1.2rem;
+    font-size: 22px;
+  }
+
+  .textonoticias p {
+    font-size: 16px;
   }
 }
 
@@ -3970,11 +4166,78 @@ footer {
 
   /* NOTICIAS */
 
-  .noticiasportada,
-  .noticiasdivs {
+  .noticiasportada {
     padding-left: 25px;
     padding-right: 25px;
   }
+
+   /* PORTADA */
+  .noticiasportada {
+    padding: 100px 32px;
+    background-position: center;
+  }
+
+  .divnoticiasportada {
+    width: 100%;
+    max-width: 720px;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* TÍTULO */
+  .titulopag h1 {
+    font-size: 32px;
+    text-align: center;
+  }
+
+
+  /* TARJETAS */
+  .noticias123 {
+    border-radius: 14px;
+  }
+
+  /* IMAGEN */
+.noticiasimg {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
+  background-position: center;
+  border-radius: 10px;
+}
+
+  .smallfecha {
+    font-size: 13px;
+  }
+
+  /* BOTÓN */
+  .btnmejorasestadio {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  /* FOOTER */
+  .footer1 {
+    flex-direction: column;
+    gap: 32px;
+    text-align: center;
+  }
+
+  .footer2 {
+    width: 100%;
+  }
+
+  .patrocinadores {
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .textofinal,
+  .textofinal2 {
+    font-size: 13px;
+    line-height: 1.5;
+    padding: 0 24px;
+  }
+  
 
   /* PORTADA */
   .noticiasportada {
@@ -4003,10 +4266,8 @@ footer {
   }
 
   .noticiasdivs {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 25px;
-    margin-bottom: 30px;
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 40px;
   }
 
   .noticias123 {
@@ -4029,19 +4290,33 @@ footer {
     margin-left: 0;
   }
 
-  /* TEXTOS DE NOTICIAS */
   .textonoticias {
-    background-color: rgba(2, 46, 77, 0.8);
+    padding: 20px;
+  }
+
+  .textonoticias h2 {
+    font-size: 20px;
+  }
+
+  .textonoticias p {
+    font-size: 15px;
+  }
+
+  /* BUSCADOR DE NOTICIAS  */
+
+  .buscadornoticias {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+    margin-bottom: 30px;
+    margin-right: 10%;
+  }
+
+  .buscadornoticias input,
+  .buscadornoticias button {
     width: 100%;
-    max-width: 80%;
-    margin-top: 12px;
-    padding: 1.2rem 1.5rem;
-    border-radius: 10px;
-    font-size: 1rem;
-    text-align: center;
-    height: auto;
-    margin-left: 0;
-    margin-right: 0;
+    font-size: 16px;
   }
 
   /* PÁGINA NOTICIA */
@@ -4091,6 +4366,33 @@ footer {
   }
   
 }
+
+@media (max-width: 480px) {
+  .noticiasdivs {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 0 14px;
+  }
+
+  .textonoticias {
+    padding: 16px;
+  }
+
+  .textonoticias h2 {
+    font-size: 18px;
+  }
+
+  .textonoticias p {
+    font-size: 14px;
+  }
+
+  .btnmejorasestadio {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+
 
 @media (max-width: 414px) {
   
@@ -4489,24 +4791,10 @@ footer {
   }
 
   .btnmejorasestadio {
-    margin-top: 10px; 
-    border: none;
-    border-radius: 8px;
-    background-color: black;
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    display: inline-block;
+    font-size: 14px;
+    padding: 10px;
   }
 
-  .noticiasdivs {
-    display: flex;
-    justify-content: center;  
-    justify-items: center; 
-    margin-bottom: 20px;
-    flex-direction: column;
-
-  }
 
   .noticiasdiv1 {
     background-image: url(http://ciberteamfc.cat/img/noticias/noticiacancer.webp);
@@ -4548,26 +4836,122 @@ footer {
     margin-left: 20px;
   }
 
-  .textonoticias {
-    background-color: rgba(2, 46, 77, 0.8);
-    color: white;
-    margin-top: 1px;
-    max-width: 260px;
-    margin-left: 20px;
-    border-radius: 10px;
+  /* PORTADA */
+  .noticiasportada {
+    padding: 70px 16px;
+    background-position: center;
   }
 
-  .noticias123 {
-    display: flex;
-    flex-direction: column; 
-    max-width: 400px;
+  .divnoticiasportada {
+    width: 100%;
+    padding: 16px;
+    text-align: center;
   }
 
-  .noticiasdivs {
+  /* TÍTULO */
+  .titulopag h1 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  /* BARRA */
+  .barraseparacion {
+    margin-bottom: 16px;
+  }
+
+  /* BUSCADOR */
+  .buscadornoticias {
     display: flex;
-    justify-content: center;  
-    justify-items: center; 
     flex-direction: column;
+    gap: 12px;
+    padding: 0 16px;
+    margin-bottom: 30px;                        
+    align-items: center;
+  }
+
+  .botonesnoticias,
+  .botonesnoticias2,
+  .rango-fechas {
+    width: 90%;               
+    max-width: 300px;         
+  }
+
+  .rango-fechas {
+    flex-direction: column;
+     height: auto;            
+    gap: 6px;                
+  }
+
+  .rango-fechas input,
+  .texto-fecha {
+    width: 100%;   
+    height: 30px;           
+    text-align: left;         
+    justify-content: flex-start;
+  }
+
+  .texto-fecha {
+    padding-left: 5px;        
+  }
+
+  .buscadornoticias input,
+  .buscadornoticias button {
+    width: 100%;
+    font-size: 16px;
+  }
+  .smallfecha {
+    font-size: 12px;
+  }
+
+  /* FOOTER */
+  
+  /* Apilar todo vertical */
+  .footer {
+    flex-direction: column;
+    padding: 20px 10px;  /* menos padding para que quepa */
+    align-items: center;
+  }
+
+  .footer1 {
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;           /* quitar márgenes grandes */
+    max-width: 100%;     /* ocupar todo el ancho disponible */
+  }
+
+  .footer2 {
+    padding-left: 0;     /* quitar padding que empuja a la derecha */
+    text-align: center;  /* centrar texto */
+    width: 100%;
+  }
+
+  .patrocinadores {
+    flex-direction: column; /* apilar las listas */
+    gap: 10px;              /* espacio uniforme */
+    align-items: center;    /* centrar elementos */
+  }
+
+  .patrocinadores ul {
+    padding: 0;
+    margin: 0;
+    text-align: center;
+  }
+
+  .textofinal,
+  .textofinal2 {
+    font-size: 12px;
+    line-height: 1.4;
+    padding: 0 10px;       /* evitar que se corte por los lados */
+    margin: 0;
+    text-align: center;
+    word-wrap: break-word; /* forzar salto de línea si es muy largo */
+  }
+
+  .footerredessociales {
+    margin-right: 0;        /* quitar margen para que no se corte */
+    display: flex;
+    justify-content: center;
+    gap: 10px;
   }
 
   /* EQUIPOS */
@@ -5169,6 +5553,7 @@ footer {
     display: none; 
   }
 
+
   /* PÁGINA NOTICIA */
 
   .noticia-principal {
@@ -5216,3 +5601,4 @@ footer {
   }
 
 }
+
