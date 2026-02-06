@@ -2,7 +2,7 @@
 $host = "localhost";
 $usuario = "cibert91492025";
 $password = "OO!ig&0YLBue";
-$bd = "ciberteam"; // nombre de tu base de datos
+$bd = "ciberteam"; 
 
 $conexion = new mysqli($host, $usuario, $password, $bd);
 
