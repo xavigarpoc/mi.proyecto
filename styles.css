@@ -1856,7 +1856,6 @@ a {
   padding-top: 10px;
 }
 
-/* Botón pedido */
 .btn-resumen {
   display: block;
   margin-top: 25px;
@@ -1952,19 +1951,16 @@ footer {
     font-size: 14px;
 }
 
-/* Botón + */
 .botones-carrito3 form:nth-child(1) button {
     background-color: #2ecc71;
     color: white;
 }
 
-/* Botón - */
 .botones-carrito3 form:nth-child(2) button {
     background-color: #f10f0f;
     color: white;
 }
 
-/* Botón eliminar */
 .botones-carrito3 form:nth-child(3) button {
     background-color: #000000;
     color: white;
@@ -2029,7 +2025,6 @@ footer {
 }
 
 /* BOTONES INFERIORES NUEVOS */
-
 
 .btnnoticia13 {
     flex: 1;  

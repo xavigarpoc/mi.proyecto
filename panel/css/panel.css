@@ -1,0 +1,130 @@
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #d0d1d3;
+  color: #C4D1DB;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* LOGIN */
+
+.login-box {
+  background-color: #6e93ac;
+  width: 100%;
+  max-width: 420px;
+  margin: auto;
+  padding: 40px 35px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  margin-top: 100px;
+}
+
+.login-box h2 {
+  background-color: #083f66;
+  color: #ffffff;
+  padding: 16px;
+  border-radius: 14px;
+  margin-bottom: 30px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.error {
+  background-color: #ffd6d6;
+  color: #9b0000;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.login-box form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.login-box input {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: none;
+  font-size: 15px;
+  outline: none;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.login-box input:focus {
+  box-shadow: 0 0 0 3px rgba(8, 63, 102, 0.4);
+  transform: scale(1.02);
+}
+
+.login-box button {
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background-color: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.login-box button:hover {
+  background-color: #111111;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.4);
+}
+
+.login-box button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* MENU */
+
+.menu-panel {
+    background-color: #6e93ac; 
+    display: flex;
+    justify-content: center;
+    padding: 15px 20px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    margin-bottom: 20px;
+}
+
+.menu-panel ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px; 
+}
+
+.menu-panel ul li a {
+    text-decoration: none;
+    color: #ecf0f1; 
+    font-weight: 600;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #083f66; 
+    transition: all 0.3s ease;
+}
+
+.menu-panel ul li a:hover {
+    background-color: #595959; 
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
